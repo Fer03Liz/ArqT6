@@ -25,6 +25,9 @@ POSTGRES_PASSWORD=tu_password_segura
 POSTGRES_DB=productosdb_name
 ```
 
+## Datos iniciales 
+Al iniciar la configuración inicial de docker, se carga la base de datos postgreSQL con **init.sql** y se cargan productos (datos quemados) con **data.sql**. Es importante tener el archivo **.env** con las credenciales de postgreSQL
+
 ## Fases del proyecto - Instalación 
 ### Fase Inicial: Construir Todo el Proyecto
 Levantar todos los servicios desde la raíz del proyecto 
