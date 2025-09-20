@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Lista de Productos</h2>
+        
+        <!-- Tabla para mostrar los productos -->
+        <table class="table table-bordered mt-4" id="tablaProductos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos se insertarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Al cargar la página, obtenemos los productos desde el backend
+        $(document).ready(function() {
+            // Realizar solicitud GET usando jQuery AJAX
+            $.get("http://localhost:8080/productos", function(data) {
+                // Iteramos sobre la lista de productos y agregamos filas a la tabla
+                data.forEach(function(producto) {
+                    var fila = "<tr>" +
+                                "<td>" + producto.id + "</td>" +
+                                "<td>" + producto.tituloProductos + "</td>" +
+                                "<td>" + producto.descripcion + "</td>" +
+                                "<td>" + producto.cantidad + "</td>" +
+                                "<td>" + producto.categoria + "</td>" +
+                               "</tr>";
+                    $("#tablaProductos tbody").append(fila); // Añadimos la fila a la tabla
+                });
+            }).fail(function() {
+                alert("Error al cargar los productos.");
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Cliente Liviano</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛍️ Gestión de Productos</h1>
+            <p>Cliente Liviano - Consumiendo API REST</p>
+            <div id="conexion-status" class="conexion-status">
+                <span id="conexion-text">Verificando conexión...</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="status" class="status" style="display: none;"></div>
+            
+            <!-- Formulario para crear/editar productos -->
+            <div class="form-section">
+                <h3>✏️ Agregar/Editar Producto</h3>
+                <form id="productoForm">
+                    <input type="hidden" id="productoId">
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Producto:</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="precio">Precio:</label>
+                        <input type="number" id="precio" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="stock">Stock:</label>
+                        <input type="number" id="stock" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">💾 Guardar Producto</button>
+                    <button type="button" id="cancelBtn" class="btn" style="display: none;">❌ Cancelar</button>
+                </form>
+            </div>
+            
+            <!-- Lista de productos -->
+            <div class="list-section">
+                <h3>📦 Lista de Productos</h3>
+                <div class="controls">
+                    <button id="refreshBtn" class="btn">🔄 Actualizar Lista</button>
+                    <input type="text" id="searchInput" placeholder="Buscar productos..." class="search-input">
+                </div>
+                
+                <div id="loading" class="loading" style="display: none;">
+                    Cargando productos... ⏳
+                </div>
+                
+                <div id="productosContainer" class="productos-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
