@@ -91,7 +91,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Jakarta EE API (ya lo tenías - está bien) -->
+		<!-- Jakarta EE API -->
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
@@ -122,6 +122,18 @@
 			<version>5.0.8</version>
 		</dependency>
 
+		<!-- SOAP -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+
+		<!-- JAXB runtime -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+		
 		<!-- <dependency>
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-netty-shaded</artifactId>
