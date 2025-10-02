@@ -19,7 +19,6 @@ build/
 
 # Docker / DB
 pgdata/
-*.env
 
 # OS
 .DS_Store
