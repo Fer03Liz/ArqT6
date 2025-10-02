@@ -1,5 +1,6 @@
-# facturacion/Dockerfile
+# inventario/Dockerfile
 FROM postgres:15-alpine
 
-# Copiamos el script de inicialización
+# Copiamos todos los scripts de inicialización (init.sql y data.sql)
 COPY init.sql /docker-entrypoint-initdb.d/
+COPY data.sql /docker-entrypoint-initdb.d/

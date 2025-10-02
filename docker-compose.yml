@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   # Base de datos Facturación
   db_facturacion:
@@ -13,11 +11,6 @@ services:
       - facturacion_data:/var/lib/postgresql/data
     networks:
       - app-network
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
 
   # Base de datos Pagos
   db_pagos:
@@ -31,11 +24,6 @@ services:
       - pagos_data:/var/lib/postgresql/data
     networks:
       - app-network
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} || exit 1"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
 
   # Base de datos Inventario
   db_inventario:
@@ -49,11 +37,6 @@ services:
       - inventario_data:/var/lib/postgresql/data
     networks:
       - app-network
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 5
 
   # Backend Spring Boot
   backend:
@@ -66,19 +49,16 @@ services:
       - db_facturacion
       - db_pagos
       - db_inventario
-
     ports:
       - "8080:8080"
     networks:
       - app-network
-    env_file:
-      - ./facturacion/.env
-      - ./pagos/.env
-      - ./inventario/.env
     environment:
-      DB_FACTURACION_URL: jdbc:postgresql://db_facturacion:5432/${POSTGRES_DB}
-      DB_PAGOS_URL: jdbc:postgresql://db_pagos:5432/${POSTGRES_DB}
-      DB_INVENTARIO_URL: jdbc:postgresql://db_inventario:5432/${POSTGRES_DB}
+      DB_FACTURACION_URL: jdbc:postgresql://db_facturacion:5432/facturaciondb
+      DB_PAGOS_URL: jdbc:postgresql://db_pagos:5432/pagosdb
+      DB_INVENTARIO_URL: jdbc:postgresql://db_inventario:5432/inventariodb
+      DB_USER: postgres
+      DB_PASSWORD: postgres
       SPRING_PROFILES_ACTIVE: docker
 
   # Frontend
