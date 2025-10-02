@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.entity;
+package com.taller3arqui.demo.entidades;
 
 import jakarta.persistence.*;
 

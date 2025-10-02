@@ -1,11 +1,11 @@
-package com.taller3arqui.demo.services;
+package com.taller3arqui.demo.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taller3arqui.Servicio.IService;
-import com.taller3arqui.productoRepository;
-import com.taller3arqui.producto;
+import com.taller3arqui.demo.repositorios.ProductoRepository;
+import com.taller3arqui.demo.entidades.Producto;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.taller3arqui.Servicio;
 
-import com.taller3arqui.demo.Producto;
+import com.taller3arqui.demo.entidades.Producto;
 import java.util.List;
 import java.util.Optional;
 
