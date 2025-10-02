@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.taller3arqui.Servicio.IService;
-import com.taller3arqui.demo.ProductoRepository;
+import com.taller3arqui.demo.Repository.ProductoRepository;
 import com.taller3arqui.demo.Producto;
 
 import java.util.List;
