@@ -2,5 +2,5 @@
 FROM postgres:15-alpine
 
 # Copiamos todos los scripts de inicialización (init.sql y data.sql)
-COPY init.sql /docker-entrypoint-initdb.d/
-COPY data.sql /docker-entrypoint-initdb.d/
+COPY 01-init.sql /docker-entrypoint-initdb.d/
+COPY 02-data.sql /docker-entrypoint-initdb.d/

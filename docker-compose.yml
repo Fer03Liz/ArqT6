@@ -57,8 +57,8 @@ services:
       DB_FACTURACION_URL: jdbc:postgresql://db_facturacion:5432/facturaciondb
       DB_PAGOS_URL: jdbc:postgresql://db_pagos:5432/pagosdb
       DB_INVENTARIO_URL: jdbc:postgresql://db_inventario:5432/inventariodb
-      DB_USER: postgres
-      DB_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Mancity2004
       SPRING_PROFILES_ACTIVE: docker
 
   # Frontend
