@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.entity;
+package com.taller3arqui.demo.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -44,4 +44,8 @@ public class PagoEntity {
 
     public LocalDateTime getFecha() { return fecha; }
     public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public void setUsuarioId(Object usuarioId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setUsuarioId'");
+    }
 }

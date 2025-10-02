@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.repository;
+package com.taller3arqui.demo.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
