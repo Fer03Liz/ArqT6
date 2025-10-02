@@ -1,0 +1,5 @@
+# facturacion/Dockerfile
+FROM postgres:15-alpine
+
+# Copiamos el script de inicialización
+COPY init.sql /docker-entrypoint-initdb.d/

@@ -1,6 +1,7 @@
-\connect productosdb;
+\connect inventariodb;
 
-CREATE TABLE IF NOT EXISTS productos (
+-- tabla inventario
+CREATE TABLE IF NOT EXISTS inventario (
     id SERIAL PRIMARY KEY,
     titulo_productos VARCHAR(255) NOT NULL,
     descripcion TEXT,

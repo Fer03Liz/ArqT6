@@ -1,5 +1,5 @@
 -- Insertar datos iniciales en productos
-INSERT INTO productos (titulo_productos, descripcion, cantidad, categoria, precio) VALUES
+INSERT INTO inventario (titulo_productos, descripcion, cantidad, categoria, precio) VALUES
 ('Laptop Lenovo ThinkPad', 'Laptop empresarial con procesador Intel i5, 16GB RAM, 512GB SSD', 10, 'Electrónica', 1200.00),
 ('Silla ergonómica', 'Silla para oficina con soporte lumbar ajustable', 25, 'Muebles', 180.00),
 ('Teclado mecánico', 'Teclado gamer retroiluminado RGB', 50, 'Accesorios', 75.00),
