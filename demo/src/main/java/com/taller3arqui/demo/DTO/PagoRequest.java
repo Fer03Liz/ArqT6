@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.dto;
+package com.taller3arqui.demo.DTO;
 
 import java.util.List;
 
@@ -20,4 +20,8 @@ public class PagoRequest {
 
     public List<ProductoCompra> getProductos() { return productos; }
     public void setProductos(List<ProductoCompra> productos) { this.productos = productos; }
+    public Object getUsuarioId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsuarioId'");
+    }
 }
