@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.controller;
+package com.taller3arqui.demo.Controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.taller3arqui.Servicio.IService;
 import com.taller3arqui.demo.Services.PagoService;
-import com.taller3arqui.demo.dto.PagoRequest;
-import com.taller3arqui.demo.model.Producto;
+import com.taller3arqui.demo.DTO.PagoRequest;
+import com.taller3arqui.demo.Producto;
 
 @CrossOrigin(origins = "http://localhost:3000") 
 @RestController

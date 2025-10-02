@@ -1,4 +1,4 @@
-package com.taller3arqui.demo.dto;
+package com.taller3arqui.demo.DTO;
 
 import java.util.List;
 

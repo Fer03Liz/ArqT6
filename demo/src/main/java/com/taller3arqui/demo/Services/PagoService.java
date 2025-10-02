@@ -1,9 +1,9 @@
-package com.taller3arqui.demo.services;
+package com.taller3arqui.demo.Services;
 
-import com.taller3arqui.demo.dto.PagoRequest;
-import com.taller3arqui.demo.dto.ProductoCompra;
-import com.taller3arqui.demo.Entity.Factura;
-import com.taller3arqui.demo.Entity.Pago;
+import com.taller3arqui.demo.DTO.PagoRequest;
+import com.taller3arqui.demo.DTO.ProductoCompra;
+import com.taller3arqui.demo.Entity.FacturaEntity;
+import com.taller3arqui.demo.Entity.PagoEntity;
 import com.taller3arqui.demo.Repository.FacturaRepository;
 import com.taller3arqui.demo.Repository.InventarioRepository;
 import com.taller3arqui.demo.Repository.PagoRepository;
@@ -29,7 +29,7 @@ public class PagoService {
     public void procesarPago(PagoRequest request) {
         // 1. Revisar inventario
         for (ProductoCompra producto : request.getProductos()) {
-            boolean disponible = inventarioRepository.existsByIdAndStockGreaterThanEqual(
+            boolean disponible = inventarioRepository.existsByIdAndCantidadGreaterThanEqual(
                     producto.getProductoId(),
                     producto.getCantidad()
             );
@@ -39,17 +39,17 @@ public class PagoService {
         }
 
         // 2. Registrar el pago en BD de pagos
-        Pago pago = new Pago();
+        PagoEntity pago = new PagoEntity();
         pago.setUsuarioId(request.getUsuarioId());
         pago.setMonto(request.getMonto());
-        pago.setMetodo(request.getMetodoPago());
+        pago.setMetodoPago(request.getMetodoPago());
         pago.setFecha(LocalDateTime.now());
         pagoRepository.save(pago);
 
         // 3. Registrar facturas en BD de facturación
         for (ProductoCompra producto : request.getProductos()) {
-            Factura factura = new Factura();
-            factura.setPagoId(pago.getId());
+            FacturaEntity factura = new FacturaEntity();
+            factura.setId(pago.getId());
             factura.setProductoId(producto.getProductoId());
             factura.setCantidad(producto.getCantidad());
             factura.setFecha(LocalDateTime.now());
