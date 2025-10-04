@@ -8,24 +8,28 @@ import com.taller3arqui.demo.entidades.PagoEntity;
 import com.taller3arqui.demo.repositorios.FacturaRepository;
 import com.taller3arqui.demo.repositorios.InventarioRepository;
 import com.taller3arqui.demo.repositorios.PagoRepository;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class PagoService {
 
-private final InventarioRepository inventarioRepository;
-private final PagoRepository pagoRepository;
-private final FacturaRepository facturacionRepository;
+@Autowired
+private InventarioRepository inventarioRepository;
 
-public PagoService(InventarioRepository inventarioRepository,
-                   PagoRepository pagoRepository,
-                   FacturaRepository facturacionRepository) {
-    this.inventarioRepository = inventarioRepository;
-    this.pagoRepository = pagoRepository;
-    this.facturacionRepository = facturacionRepository;
+@Autowired
+private PagoRepository pagoRepository;
+
+@Autowired
+private FacturaRepository facturacionRepository;
+
+
+public List<PagoEntity> obtenerPagos() {
+    return pagoRepository.findAll();
 }
 
 @Transactional

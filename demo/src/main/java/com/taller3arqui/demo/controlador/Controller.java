@@ -14,7 +14,11 @@ import com.taller3arqui.demo.servicios.PagoService;
 import com.taller3arqui.demo.dto.PagoRequest;
 import com.taller3arqui.demo.entidades.Producto;
 import com.taller3arqui.demo.servicios.ProductoService;
+import com.taller3arqui.demo.servicios.FacturaService;
 import com.taller3arqui.demo.servicios.PagoService;
+import com.taller3arqui.demo.entidades.PagoEntity;
+import com.taller3arqui.demo.entidades.FacturaEntity;
+
 
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 @RestController
@@ -23,6 +27,9 @@ public class Controller {
 
     @Autowired
     private ProductoService servicio;
+
+    @Autowired
+    private FacturaService facturaService;
 
     @Autowired
     private PagoService pagoService;
@@ -40,6 +47,17 @@ public class Controller {
     public List<Producto> obtenerProductos() {
         return servicio.findAll();
     }
+
+    @GetMapping("/pagos")
+    public List<PagoEntity> obtenerPagos() {
+        return pagoService.obtenerPagos();
+    }
+
+    @GetMapping("/facturacion")
+    public List<FacturaEntity> obtenerFacturas() {
+        return facturaService.obtenerFacturas();
+    }
+
 
     // Crear un nuevo producto
     @PostMapping("/productos")
