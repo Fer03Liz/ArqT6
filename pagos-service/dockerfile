@@ -1,0 +1,11 @@
+# Dockerfile para pagos-service
+FROM eclipse-temurin:17-jdk-alpine
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Puerto que expondrá el servicio (declarativo)
+EXPOSE 9090
+
+# Comando por defecto: abre un shell, puedes cambiarlo luego si quieres ejecutar algo
+CMD ["sh"]

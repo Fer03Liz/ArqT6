@@ -25,6 +25,16 @@ services:
     networks:
       - app-network
 
+  # Servicio gRPC de Pagos
+  pagos-service:
+      build:
+        context: ./pagos-service
+      container_name: pagos-service
+      ports:
+        - "9090:9090"
+      depends_on:
+        - db_pagos
+
   # Base de datos Inventario
   db_inventario:
     build: ./inventario

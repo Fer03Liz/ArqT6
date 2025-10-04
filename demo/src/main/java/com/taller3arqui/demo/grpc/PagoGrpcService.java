@@ -1,32 +1,30 @@
-// package com.taller3arqui.demo.grpc;
+package com.taller3arqui.demo.grpc;
+import com.taller3arqui.demo.grpc.services.Services.PagoRequest;
+import com.taller3arqui.demo.grpc.services.Services.PagoResponse;
+import com.taller3arqui.demo.grpc.services.PagoServiceGrpc;
 
-// import com.taller3arqui.demo.services.pagoService;
-// import com.taller3arqui.demo.dto.PagoRequest;
+import io.grpc.stub.StreamObserver;
 
+public class PagoGrpcService extends PagoServiceGrpc.PagoServiceImplBase {
 
-// @GrpcService
-// public class PagoGrpcService extends PagoServiceGrpc.PagoServiceImplBase {
+    @Override
+    public void procesarPago(PagoRequest request, StreamObserver<PagoResponse> responseObserver) {
+        // Aquí recibes directamente el request generado por gRPC (ya con getters)
+        String cliente = request.getCliente();
+        double monto = request.getMonto();
+        String metodoPago = request.getMetodoPago();
 
-//     private final PagoService pagoService;
+        // Ejemplo de lógica
+        boolean exito = monto > 0;
+        String mensaje = exito ? "Pago procesado con éxito" : "Error en el pago";
 
-//     public PagoGrpcService(PagoService pagoService) {
-//         this.pagoService = pagoService;
-//     }
+        // Respuesta usando el builder
+        PagoResponse response = PagoResponse.newBuilder()
+            .setEstado("OK")   // porque tu proto tiene `string estado`
+            .setMensaje("Pago procesado correctamente")
+            .build();
 
-//     @Override
-//     public void procesarPago(PagoRequest request, StreamObserver<PagoResponse> responseObserver) {
-//         pagoService.procesarPago(
-//             request.getCliente(),
-//             request.getProductosList(),
-//             request.getMetodoPago(),
-//             request.getMonto()
-//         );
-
-//         PagoResponse response = PagoResponse.newBuilder()
-//             .setEstado("OK")
-//             .build();
-
-//         responseObserver.onNext(response);
-//         responseObserver.onCompleted();
-//     }
-// }
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+}

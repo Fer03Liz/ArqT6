@@ -6,6 +6,7 @@ public class PagoRequest {
     private String cliente;
     private String metodoPago;
     private Double monto;
+    private Long usuarioId;
     private List<ProductoCompra> productos;
 
     // Getters y setters
@@ -20,8 +21,6 @@ public class PagoRequest {
 
     public List<ProductoCompra> getProductos() { return productos; }
     public void setProductos(List<ProductoCompra> productos) { this.productos = productos; }
-    public Object getUsuarioId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsuarioId'");
-    }
+    public Long getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
 }
