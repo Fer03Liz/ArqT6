@@ -48,6 +48,11 @@ public class ProductoService implements IService {
    @Override
     public List<Producto> findAll() {
         return productoRepository.findAll();
-    }   
+    }
+    
+    @Override
+    public int count() {
+        return (int) productoRepository.count();
+    }
 
 }

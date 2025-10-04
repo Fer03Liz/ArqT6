@@ -6,5 +6,6 @@ import com.taller3arqui.demo.entidades.Producto;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
     
 }

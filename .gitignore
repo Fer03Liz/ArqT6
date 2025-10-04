@@ -15,11 +15,9 @@ target/
 # Node / frontend
 node_modules/
 dist/
-build/
 
 # Docker / DB
 pgdata/
-*.env
 
 # OS
 .DS_Store

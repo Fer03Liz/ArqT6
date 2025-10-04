@@ -11,4 +11,5 @@ public interface IService {
     void deleteProducto(Long id);
     Producto updateProducto(Long id, Producto producto);
     List<Producto> findAll();
+    int count();
 }

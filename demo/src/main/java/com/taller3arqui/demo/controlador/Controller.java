@@ -4,21 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import jakarta.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.taller3arqui.Servicio.IService;
 import com.taller3arqui.demo.servicios.PagoService;
 import com.taller3arqui.demo.dto.PagoRequest;
 import com.taller3arqui.demo.entidades.Producto;
+import com.taller3arqui.demo.servicios.ProductoService;
+import com.taller3arqui.demo.servicios.PagoService;
 
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 @RestController
 @RequestMapping("/api")
 public class Controller {
 
     @Autowired
-    private IService servicio;
+    private ProductoService servicio;
 
     @Autowired
     private PagoService pagoService;
