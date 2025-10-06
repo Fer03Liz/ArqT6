@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import com.taller3arqui.Servicio.IService;
 import com.taller3arqui.demo.entidades.Producto;
 import com.taller3arqui.demo.repositorios.ProductoRepository;
 

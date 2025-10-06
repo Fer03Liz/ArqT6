@@ -9,13 +9,11 @@ import jakarta.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.taller3arqui.Servicio.IService;
 import com.taller3arqui.demo.servicios.PagoService;
-import com.taller3arqui.demo.dto.PagoRequest;
+import com.taller3arqui.demo.DTO.PagoRequest;
 import com.taller3arqui.demo.entidades.Producto;
 import com.taller3arqui.demo.servicios.ProductoService;
 import com.taller3arqui.demo.servicios.FacturaService;
-import com.taller3arqui.demo.servicios.PagoService;
 import com.taller3arqui.demo.entidades.PagoEntity;
 import com.taller3arqui.demo.entidades.FacturaEntity;
 

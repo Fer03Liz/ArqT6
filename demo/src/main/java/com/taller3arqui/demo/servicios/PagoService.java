@@ -1,7 +1,7 @@
 package com.taller3arqui.demo.servicios;
 
-import com.taller3arqui.demo.dto.PagoRequest;
-import com.taller3arqui.demo.dto.ProductoCompra;
+import com.taller3arqui.demo.DTO.PagoRequest;
+import com.taller3arqui.demo.DTO.ProductoCompra;
 import com.taller3arqui.demo.entidades.FacturaEntity;
 import com.taller3arqui.demo.entidades.InventarioEntity;
 import com.taller3arqui.demo.entidades.PagoEntity;
