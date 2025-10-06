@@ -20,7 +20,7 @@ public class PagoRequest {
     public void setMonto(Double monto) { this.monto = monto; }
 
     public List<ProductoCompra> getProductos() { return productos; }
-    public void setProductos(List<ProductoCompra> productos) { this.productos = productos; }
+    public void setProductos(String productos2) { this.productos = productos2; }
     public Long getUsuarioId() { return usuarioId; }
     public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
 }

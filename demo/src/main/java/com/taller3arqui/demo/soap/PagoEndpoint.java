@@ -10,18 +10,26 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.taller3arqui.demo.DTO.CrearPagoRequest;
 import com.taller3arqui.demo.DTO.CrearPagoResponse;
+import com.taller3arqui.demo.Services.PagoService;
 
 @Endpoint
 public class PagoEndpoint {
 
-    private static final String NAMESPACE_URI = "http://taller3arqui.com/pagos";
+    private static final String NAMESPACE_URI = "http://taller3arqui.com/demo/soap";
+
+    private final PagoService pagoService;
+
+    public PagoEndpoint(PagoService pagoService) {
+        this.pagoService = pagoService;
+    }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "crearPagoRequest")
     @ResponsePayload
     public CrearPagoResponse crearPago(@RequestPayload CrearPagoRequest request) {
+        pagoService.procesarPago(request.toPagoRequest()); // convierte DTO SOAP a DTO interno
         CrearPagoResponse response = new CrearPagoResponse();
-        response.setResultado("Pago SOAP creado para " + request.getUsuario() +
-                              " con monto " + request.getMonto());
+        response.setResultado("Pago procesado correctamente");
         return response;
     }
 }
+
