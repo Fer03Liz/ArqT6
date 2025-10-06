@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package com.taller3arqui.demo.grpc.services;
+
+// Mensajes comunes
+message ProductoCompra {
+  int64 productoId = 1;
+  int32 cantidad = 2;
+}
+
+// Mensajes para Pago
+message PagoRequest {
+  string cliente = 1;
+  repeated ProductoCompra productos = 2;
+  string metodoPago = 3;
+  double monto = 4;
+  int64 usuarioId = 5;
+}
+
+message PagoResponse {
+  string estado = 1;
+  string mensaje = 2;
+}
+
+// Servicio gRPC para pagos
+service PagoService {
+  rpc procesarPago(PagoRequest) returns (PagoResponse);
+}
+
+// Mensajes para Inventario
+message Producto {
+  int64 id = 1;
+  string tituloProductos = 2;
+  string descripcion = 3;
+  int32 cantidad = 4;
+  string categoria = 5;
+  double precio = 6;
+}
+
+message InventarioRequest {
+  int64 idProducto = 1;
+}
+
+message InventarioResponse {
+  Producto producto = 1;
+  string estado = 2;
+  string mensaje = 3;
+}
+
+// Servicio gRPC para inventario
+service InventarioService {
+  rpc consultarProducto(InventarioRequest) returns (InventarioResponse);
+  rpc actualizarCantidad(Producto) returns (InventarioResponse);
+}
+
+// Mensajes para Facturación
+message FacturaRequest {
+  string cliente = 1;
+  repeated ProductoCompra productos = 2;
+  double total = 3;
+}
+
+message FacturaResponse {
+  string facturaId = 1;
+  string estado = 2;
+  string mensaje = 3;
+}
+
+// Servicio gRPC para facturación
+service FacturaService {
+  rpc generarFactura(FacturaRequest) returns (FacturaResponse);
+}
