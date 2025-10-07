@@ -1,5 +1,4 @@
 package com.taller3arqui.demo.entidades;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -44,4 +43,12 @@ public class FacturaEntity {
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
+    public void setProductoId(Long productoId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setProductoId'");
+    }
+    public void setCantidad(int cantidad) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCantidad'");
+    }
 }

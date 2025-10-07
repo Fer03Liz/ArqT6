@@ -44,4 +44,7 @@ public class PagoEntity {
 
     public LocalDateTime getFecha() { return fecha; }
     public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public void setUsuarioId(Object usuarioId) {
+        throw new UnsupportedOperationException("Unimplemented method 'setUsuarioId'");
+    }
 }

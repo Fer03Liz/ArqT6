@@ -13,60 +13,65 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class PagoService {
 
-@Autowired
-private InventarioRepository inventarioRepository;
+    private final InventarioRepository inventarioRepository;
+    private final PagoRepository pagoRepository;
+    private final FacturaRepository facturacionRepository;
 
-@Autowired
-private PagoRepository pagoRepository;
+    public PagoService(InventarioRepository inventarioRepository,
+                       PagoRepository pagoRepository,
+                       FacturaRepository facturacionRepository) {
+        this.inventarioRepository = inventarioRepository;
+        this.pagoRepository = pagoRepository;
+        this.facturacionRepository = facturacionRepository;
+    }
 
-@Autowired
-private FacturaRepository facturacionRepository;
+    public List<PagoEntity> obtenerPagos() {
+        return pagoRepository.findAll();
+    }
 
+    @Transactional
+    public void procesarPago(PagoRequest request) {
+        // 1. Validar y actualizar inventario
+        for (ProductoCompra producto : request.getProductos()) {
+            InventarioEntity inventario = inventarioRepository.findById(producto.getProductoId())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Producto con ID " + producto.getProductoId() + " no encontrado."));
 
-public List<PagoEntity> obtenerPagos() {
-    return pagoRepository.findAll();
-}
+            if (inventario.getCantidad() < producto.getCantidad()) {
+                throw new RuntimeException("Stock insuficiente para el producto: " + inventario.getTituloProductos());
+            }
 
-@Transactional
-public void procesarPago(PagoRequest request) {
-    // 1. Revisar inventario y actualizar stock
-    for (ProductoCompra producto : request.getProductos()) {
-        InventarioEntity inventario = inventarioRepository.findById(producto.getProductoId())
-                .orElseThrow(() -> new RuntimeException(
-                        "Producto con ID " + producto.getProductoId() + " no encontrado."));
-
-        if (inventario.getCantidad() < producto.getCantidad()) {
-            throw new RuntimeException("Stock insuficiente para el producto: " + inventario.getTituloProductos());
+            // Descontar stock
+            inventario.setCantidad(inventario.getCantidad() - producto.getCantidad());
+            inventarioRepository.save(inventario);
         }
 
-        // descontar stock
-        inventario.setCantidad(inventario.getCantidad() - producto.getCantidad());
-        inventarioRepository.save(inventario);
-    }
+        // 2. Registrar pago
+        PagoEntity pago = new PagoEntity();
+        pago.setCliente(request.getCliente());
+        pago.setMonto(request.getMonto());
+        pago.setMetodoPago(request.getMetodoPago());
+        pago.setFecha(LocalDateTime.now());
+        pagoRepository.save(pago);
 
-    // 2. Registrar el pago
-    PagoEntity pago = new PagoEntity();
-    pago.setCliente(request.getCliente()); 
-    pago.setMonto(request.getMonto());
-    pago.setMetodoPago(request.getMetodoPago());
-    pago.setFecha(LocalDateTime.now());
-    pagoRepository.save(pago);
+        // 3. Generar facturas asociadas al pago
+        for (ProductoCompra producto : request.getProductos()) {
+            FacturaEntity factura = new FacturaEntity();
+            factura.setCliente(request.getCliente());
+            factura.setDescripcionPedido("Compra de producto ID: " + producto.getProductoId());
+            factura.setProductoId(producto.getProductoId());
+            factura.setCantidad(producto.getCantidad());
 
-    // 3. Generar facturas
-    for (ProductoCompra producto : request.getProductos()) {
-        FacturaEntity factura = new FacturaEntity();
-        factura.setCliente(request.getCliente());
-        factura.setDescripcionPedido("Compra de producto ID: " + producto.getProductoId());
-        factura.setTotal(producto.getCantidad() * inventarioRepository.findById(producto.getProductoId())
-                .map(InventarioEntity::getPrecio)
-                .orElse(0.0));
-        factura.setFecha(LocalDateTime.now());
-        facturacionRepository.save(factura);
+            double precio = inventarioRepository.findById(producto.getProductoId())
+                    .map(InventarioEntity::getPrecio)
+                    .orElse(0.0);
+            factura.setTotal(producto.getCantidad() * precio);
+            factura.setFecha(LocalDateTime.now());
+            facturacionRepository.save(factura);
+        }
     }
-}
 }

@@ -17,7 +17,6 @@ import com.taller3arqui.demo.servicios.FacturaService;
 import com.taller3arqui.demo.entidades.PagoEntity;
 import com.taller3arqui.demo.entidades.FacturaEntity;
 
-
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 @RestController
 @RequestMapping("/api")

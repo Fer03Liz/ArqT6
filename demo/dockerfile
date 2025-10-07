@@ -1,21 +1,25 @@
-# Usar OpenJDK 17
-FROM openjdk:17-jdk-slim
+# Etapa 1: Compilación con Maven y JDK 17
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# Establecer directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos Maven
+# Copiar pom, src y proto
 COPY pom.xml .
 COPY src ./src
+COPY src/main/proto ./src/main/proto
 
-# Instalar Maven
-RUN apt-get update && apt-get install -y maven
-
-# Compilar la aplicación
+# Compilar y empaquetar
 RUN mvn clean package -DskipTests
 
-# Exponer el puerto 8080
+# Etapa 2: Imagen ligera para ejecutar el JAR
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+# Copiar el JAR compilado desde la etapa de build
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
 # Ejecutar la aplicación
-CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
